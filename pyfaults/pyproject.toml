@@ -1,0 +1,111 @@
+################################################################################
+# Build Configuration
+################################################################################
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[project]
+name = "pyfaults"
+version = "1.0.0"
+
+description = """
+An open-source Python library for identifying and screening potential stacking fault models in crystalline materials with planar disorder.
+"""
+authors = [
+    { name = "Sinclair Combs", email = "sinclaircombs@mines.edu" },
+    { name = "Mimi Rai", email = "mimi_rai@mines.edu},
+]
+maintainers = [
+    { name = "Sinclair Combs", email = "sinclaircombs@mines.edu" },
+]
+
+license = "BSD-3-Clause"
+requires-python = ">= 3.10"
+readme = {"file" = "README.md", "content-type" = "text/markdown"}
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+]
+keywords = ["crystallography", "stacking faults", "PXRD", "powder x-ray diffraction"]
+dependencies = ["numpy>=2.0", "pandas>=2.0", "Dans_Diffraction~=3.2.0"]
+
+[project.urls]
+Homepage = "https://github.com/Maughan-Lab/pyfaults"
+Source = "https://github.com/Maughan-Lab/pyfaults"
+Issues = "https://github.com/Maughan-Lab/pyfaults/issues"
+Documentation = "https://maughan-lab.github.io/pyfaults/"
+
+[project.optional-dependencies]
+dev = [
+    "hatch",
+    "pre-commit",
+]
+
+################################################################################
+# Tool Configuration
+################################################################################
+
+[tool.hatch.build]
+only-packages = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pyfaults"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["raises"]
+
+[tool.coverage.paths]
+source = [
+    "src/pyfaults",
+    "*/site-packages/pyfaults",
+]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover"]
+precision = 2
+
+[tool.hatch.envs.default]
+installer = "uv"
+
+[tool.hatch.envs.build]
+description = """Test the installation the package."""
+dependencies = [
+    "pip",
+    "twine",
+]
+detached = true
+
+[tool.hatch.envs.build.scripts]
+check = [
+    "pip check",
+    "hatch build {args:--clean}",
+    "twine check dist/*",
+]
+
+#--------------- Run tests ---------------#
+
+
+[tool.hatch.envs.test]
+description = """Run the test suite."""
+extra-dependencies = [
+    "pytest",
+    "pytest-cov",
+    "pytest-raises",
+    "pytest-randomly",
+    "pytest-xdist",
+]
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.11", "3.12", "3.13"]
+
+[tool.hatch.envs.test.scripts]
+run = "pytest {args:--cov=pyfaults --cov-report=term-missing}"
