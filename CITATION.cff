@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Combs
+    given-names: Sinclair R.
+    orcid: https://orcid.org/0000-0002-8982-0288
+  - family-names: Maughan
+    given-names: Annalise E.
+    orcid: https://orcid.org/0000-0002-3292-4799
+title: "PyFaults: a Python tool for stacking fault screening"
+version: 1.0.0
+identifiers: 
+  - type: doi
+    value: 10.1107/S1600576724009956
+date-released: 2023
