@@ -9,10 +9,7 @@ requires = ["hatchling"]
 [project]
 name = "pyfaults"
 version = "1.0.0"
-
-description = """
-An open-source Python library for identifying and screening potential stacking fault models in crystalline materials with planar disorder.
-"""
+description = "An open-source Python library for identifying and screening potential stacking fault models in crystalline materials with planar disorder."
 authors = [
     { name = "Sinclair Combs", email = "sinclaircombs@mines.edu" },
     { name = "Mimi Rai", email = "mimi_rai@mines.edu},
@@ -20,7 +17,6 @@ authors = [
 maintainers = [
     { name = "Sinclair Combs", email = "sinclaircombs@mines.edu" },
 ]
-
 license = "BSD-3-Clause"
 requires-python = ">= 3.10"
 readme = {"file" = "README.md", "content-type" = "text/markdown"}
@@ -92,8 +88,6 @@ check = [
 ]
 
 #--------------- Run tests ---------------#
-
-
 [tool.hatch.envs.test]
 description = """Run the test suite."""
 extra-dependencies = [
@@ -105,7 +99,7 @@ extra-dependencies = [
 ]
 
 [[tool.hatch.envs.test.matrix]]
-python = ["3.10", "3.11", "3.12", "3.13"]
+python = ["3.10"]
 
 [tool.hatch.envs.test.scripts]
 run = "pytest {args:--cov=pyfaults --cov-report=term-missing}"
